@@ -1,0 +1,7 @@
+---
+# Install startup script for recpt1
+- name: Copy startup script
+  ansible.builtin.copy:
+    src: startup
+    dest: "{{ ansible_facts.env.HOME }}/docker-mirakurun-epgstation/mirakurun/opt/bin/startup"
+    mode: +x

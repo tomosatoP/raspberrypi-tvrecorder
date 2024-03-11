@@ -1,0 +1,11 @@
+---
+# Customize Raspberri Pi 4 systems
+# location
+- ansible.builtin.include_tasks: locale.yaml
+# /boot/firmware/config.txt
+- ansible.builtin.include_tasks: config.yaml
+# /boot/firmware/cmdline.txt
+- ansible.builtin.include_tasks: cmdline.yaml
+  loop: "{{ cmdline }}"
+# Extend the size of the Swapfile
+- ansible.builtin.include_tasks: swapfile.yaml

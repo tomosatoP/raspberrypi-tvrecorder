@@ -1,0 +1,13 @@
+---
+# Uninstall firmware & driver
+- name: Purge driver
+  become: true
+  ansible.builtin.apt:
+    name: px4-drv-dkms
+    state: absent
+
+- name: Remove firmware
+  become: true
+  ansible.builtin.file:
+    path: /lib/firmware/it930x-firmware.bin
+    state: absent

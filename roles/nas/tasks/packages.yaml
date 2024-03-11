@@ -1,0 +1,9 @@
+---
+- name: Install packages
+  become: true
+  ansible.builtin.apt:
+    name: "{{ packages }}"
+    update_cache: true
+    autoclean: true
+    autoremove: true
+    state: latest

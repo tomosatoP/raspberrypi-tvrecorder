@@ -1,0 +1,37 @@
+---
+# Install firmware
+- name: Stat /lib/firmware/it930x-firmware.bin
+  become: false
+  ansible.builtin.stat:
+    path: /lib/firmware/it930x-firmware.bin
+  register: stat_firmware
+  
+# Skip if "/lib/firmware/it930x-firmware.bin" is already present.
+- name: Setup firmware
+  become: false
+  block:
+
+    - name: Make px4_drv/fwtool
+      community.general.make:
+        chdir: "{{ ansible_facts.env.HOME }}/px4_drv/fwtool"
+
+    - name: Unarchive offcial BDA driver
+      ansible.builtin.unarchive:
+        src: "{{ driver.official.url }}"
+        dest: "{{ ansible_facts.env.HOME }}/px4_drv/fwtool/"
+        remote_src: true
+        include: "{{ driver.official.sys }}"
+
+    - name: Build firmware it930x-firmware.bin
+      ansible.builtin.command:
+        cmd: ./fwtool "{{ driver.official.sys }}" it930x-firmware.bin
+        chdir: "{{ ansible_facts.env.HOME }}/px4_drv/fwtool/"
+
+    - name: Copy /lib/firmware/it930x-firmware.bin
+      become: true
+      ansible.builtin.copy:
+        src: "{{ ansible_facts.env.HOME }}/px4_drv/fwtool/it930x-firmware.bin"
+        dest: /lib/firmware/it930x-firmware.bin
+        remote_src: true
+  
+  when: stat_firmware.stat.exists == false

@@ -1,0 +1,16 @@
+---
+# We have not been able to find out if all of these packages are needed.
+packages:
+  - ffmpeg
+
+url: https://github.com/l3tnun/docker-mirakurun-epgstation.git
+
+docker_compose_file:
+  - {src: docker-compose-sample.yml, dest: compose.yaml}
+
+epgstation_config_files:
+  - {src: enc.js.template, dest: enc.js}
+  - {src: config.yml.template, dest: config.yml}
+  - {src: operatorLogConfig.sample.yml, dest: operatorLogConfig.yml}
+  - {src: epgUpdaterLogConfig.sample.yml, dest: epgUpdaterLogConfig.yml}
+  - {src: serviceLogConfig.sample.yml, dest: serviceLogConfig.yml}

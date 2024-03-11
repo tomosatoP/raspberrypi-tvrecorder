@@ -1,0 +1,17 @@
+---
+# Update packages 
+- ansible.builtin.include_tasks: packages.yaml
+# Download https://github.com/l3tnun/docker-mirakurun-epgstation
+- ansible.builtin.include_tasks: download.yaml
+# Edit compose.yaml
+- ansible.builtin.include_tasks: compose.yaml
+# Make mirakurun/conf/server.yml
+- ansible.builtin.include_tasks: server.yaml
+# Make mirakurun/conf/tuners.yml
+- ansible.builtin.include_tasks: tuners.yaml
+# make mirakurun/conf/channels.yml
+- ansible.builtin.include_tasks: channels.yaml
+# copy mirakurun/opt/bin/startup
+- ansible.builtin.include_tasks: recpt1.yaml
+# edit epgstation/config/config.yml
+- ansible.builtin.include_tasks: config.yaml

@@ -1,0 +1,9 @@
+---
+- name: Install docker-engine
+  become: true
+  ansible.builtin.apt:
+    name: "{{ docker_engine }}"
+    update_cache: true
+    autoclean: true
+    autoremove: true
+    state: latest

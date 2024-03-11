@@ -1,0 +1,42 @@
+---
+# Setup docker-mirakurun-epgstation
+- name: Git clone docker-mirakurun-epgstation
+  become: false
+  ansible.builtin.git:
+    repo: "{{ url }}"
+    dest: "{{ ansible_facts.env.HOME }}/docker-mirakurun-epgstation"
+    depth: 1
+  register: git_clone
+
+# If there are updates to the source, run them.
+- name: If there are updates to the source, run them.
+  become: false
+  block:
+
+  - name: Copy compose.yaml
+    ansible.builtin.copy:
+      remote_src: true
+      backup: true
+      src: "{{ ansible_facts.env.HOME }}/docker-mirakurun-epgstation/{{ item.src }}"
+      dest: "{{ ansible_facts.env.HOME }}/docker-mirakurun-epgstation/{{ item.dest }}"
+    loop: "{{ docker_compose_file }}"
+
+  - name: Copy EPGStation config files
+    ansible.builtin.copy:
+      remote_src: true
+      backup: true
+      src: "{{ ansible_facts.env.HOME }}/docker-mirakurun-epgstation/epgstation/config/{{ item.src }}"
+      dest: "{{ ansible_facts.env.HOME }}/docker-mirakurun-epgstation/epgstation/config/{{ item.dest }}"
+    loop: "{{ epgstation_config_files }}"
+
+  - name: Create folder for temporary recording file storage
+    ansible.builtin.file:
+      path: "{{ ansible_facts.env.HOME }}/docker-mirakurun-epgstation/recordedTmp"
+      state: directory
+
+  - name: Create folder for command recpt1
+    ansible.builtin.file:
+      path: "{{ ansible_facts.env.HOME }}/docker-mirakurun-epgstation/mirakurun/opt/bin"
+      state: directory
+
+  when: git_clone.changed == true

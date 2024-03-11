@@ -1,0 +1,44 @@
+---
+- name: Git clone recpt1 source
+  become: false
+  ansible.builtin.git:
+    repo: "{{ url }}"
+    dest: "{{ ansible_facts.env.HOME }}/recpt1"
+    depth: 1
+  notify: Uninstall command recpt1
+
+- name: flush handlers
+  ansible.builtin.meta: flush_handlers
+
+- name: Stat recpt1
+  become: false
+  ansible.builtin.stat:
+    path: /usr/local/bin/recpt1
+  register: stat_recpt1
+
+# Skip if recpt1 command is already installed.
+- name: Setup command recpt1
+  become: false
+  block:
+
+  - name: Run shell script autogen
+    ansible.builtin.shell:
+      cmd: ./autogen.sh
+      chdir: "{{ ansible_facts.env.HOME }}/recpt1/recpt1"
+
+  - name: Run shell script configure
+    ansible.builtin.shell:
+      cmd: ./configure --enable-b25
+      chdir: "{{ ansible_facts.env.HOME }}/recpt1/recpt1"
+
+  - name: Make
+    community.general.make:
+      chdir: "{{ ansible_facts.env.HOME }}/recpt1/recpt1"
+
+  - name: Install
+    become: true
+    community.general.make:
+      chdir: "{{ ansible_facts.env.HOME }}/recpt1/recpt1"
+      target: install
+
+  when: stat_recpt1.stat.exists == false

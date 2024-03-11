@@ -1,0 +1,5 @@
+recorder:
+  hosts:
+    rpi4tvrec:
+      ansible_host: 192.168.68.135
+      ansible_user: play

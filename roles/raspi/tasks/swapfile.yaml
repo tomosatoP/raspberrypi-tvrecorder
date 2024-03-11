@@ -1,0 +1,14 @@
+---
+- name: Set swapfile size
+  become: true
+  community.general.ini_file:
+    path: /etc/dphys-swapfile
+    option: "{{ item.opt }}"
+    value: "{{ item.val }}"
+    state: "{{ item.stat }}"
+    no_extra_spaces: true
+  loop: "{{ swapfile }}"
+  notify: Restart dphys-swapfile
+
+- name: flush handlers
+  ansible.builtin.meta: flush_handlers

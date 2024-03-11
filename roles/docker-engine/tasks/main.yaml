@@ -1,0 +1,7 @@
+---
+# Update packages
+- ansible.builtin.include_tasks: packages.yaml
+# Add docker app repository
+- ansible.builtin.include_tasks: add-repo.yaml
+# Install docker engine on debian
+- ansible.builtin.include_tasks: docker-engine.yaml

@@ -1,0 +1,11 @@
+---
+# Start docker-mirakurun-epgstation
+- name: Pull docker-mirakurun-epgstation
+  become: true
+  community.docker.docker_compose_v2_pull:
+    project_src: "{{ ansible_facts.env.HOME }}/docker-mirakurun-epgstation"
+
+- name: Start docker-mirakurun-epgstation
+  become: true
+  community.docker.docker_compose_v2:
+    project_src: "{{ ansible_facts.env.HOME }}/docker-mirakurun-epgstation"

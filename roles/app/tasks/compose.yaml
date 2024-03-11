@@ -1,0 +1,34 @@
+---
+# Setup compose.yaml
+- name: Slurp compose sample file
+  become: false
+  ansible.builtin.slurp:
+    src: "{{ ansible_facts.env.HOME }}/docker-mirakurun-epgstation/docker-compose-sample.yml"
+  register: dict_compose
+
+- name: B64decode compose sample file
+  become: false
+  ansible.builtin.set_fact:
+    dict_compose: "{{ dict_compose.content | ansible.builtin.b64decode }}"
+
+- name: Set_fact dict_compose
+  become: false
+  ansible.builtin.set_fact:
+    dict_compose: "{{ dict_compose | ansible.builtin.from_yaml }}"
+
+- name: Remove invalid Keys and Values from dick_compose
+  become: false
+  ansible.builtin.set_fact:
+    dict_compose: "{{ dict_compose | ansible.builtin.combine(compose.remove, recursive=true, list_merge='replace') }}"
+
+- name: Customize Key and Value to dict_compose
+  become: false
+  ansible.builtin.set_fact:
+    dict_compose: "{{ dict_compose | ansible.builtin.combine(compose.add, recursive=true, list_merge='append_rp') }}"
+
+- name: Save file
+  become: false
+  ansible.builtin.copy:
+    backup: true
+    dest: "{{ ansible_facts.env.HOME }}/docker-mirakurun-epgstation/compose.yaml"
+    content: "{{ dict_compose | ansible.builtin.to_nice_yaml(sort_keys=false, indent=2, width=-1) }}"

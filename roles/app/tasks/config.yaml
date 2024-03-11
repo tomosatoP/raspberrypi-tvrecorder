@@ -1,0 +1,29 @@
+---
+# Setup epgstation/config/config.yml
+- name: Slurp epgstation config sample file
+  become: false
+  ansible.builtin.slurp:
+    src: "{{ ansible_facts.env.HOME }}/docker-mirakurun-epgstation/epgstation/config/config.yml.template"
+  register: dict_config
+
+- name: B64decode epgstation config sample file
+  become: false
+  ansible.builtin.set_fact:
+    dict_config: "{{ dict_config.content | ansible.builtin.b64decode }}"
+
+- name: Set_fact dict_config
+  become: false
+  ansible.builtin.set_fact:
+    dict_config: "{{ dict_config | ansible.builtin.from_yaml }}"
+
+- name: Customize Key and Value
+  become: false
+  ansible.builtin.set_fact:
+    dict_config: "{{ dict_config | ansible.builtin.combine(epgstation.config, recursive=true, list_merge='replace') }}"
+
+- name: Save file
+  become: false
+  ansible.builtin.copy:
+    backup: true
+    dest: "{{ ansible_facts.env.HOME }}/docker-mirakurun-epgstation/epgstation/config/config.yml"
+    content: "{{ dict_config | ansible.builtin.to_nice_yaml(sort_keys=false, indent=2, width=-1) }}"

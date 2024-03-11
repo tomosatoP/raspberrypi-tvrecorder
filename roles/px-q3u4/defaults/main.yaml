@@ -1,0 +1,28 @@
+---
+# We have not been able to find out if all of these packages are needed.
+packages:
+  - udev
+  - dkms
+  - autoconf
+  - automake
+  - unzip
+  - xz-utils
+  - make
+  - cmake
+  - gcc
+  - g++
+  - python3-dev
+  - python3-pip
+  - curl
+  - git
+  #- alpine
+
+driver:
+  unofficial:
+    url: https://github.com/tsukumijima/px4_drv.git
+    version: "v0.4.4"
+    deb: https://github.com/tsukumijima/px4_drv/releases/download/v0.4.4/px4-drv-dkms_0.4.4_all.deb
+  official:
+    url: http://plex-net.co.jp/plex/pxq3u4/pxq3u4_BDA_ver1x64.zip
+    sys: pxq3u4_BDA_ver1x64/PXQ3U4.sys
+  

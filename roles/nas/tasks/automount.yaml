@@ -1,0 +1,43 @@
+---
+- name: Setup systemd.automount /mnt/nas
+  become: true
+  block:
+
+    - name: Stat directory
+      ansible.builtin.stat:
+        path: "{{ nas.directory }}"
+      register: stat_directory
+
+    - name: Create directory
+      ansible.builtin.file:
+        state: directory
+        path: "{{ nas.directory }}"
+        mode: "0777"
+      when: stat_directory.stat.exists == false
+
+    - name: Setup mnt-nas.mount
+      community.general.ini_file:
+        path: /etc/systemd/system/mnt-nas.mount
+        section: "{{ item.sec }}"
+        option: "{{ item.opt }}"
+        value: "{{ item.val }}"
+        state: present
+        backup: true
+        no_extra_spaces: true
+      loop: "{{ mount }}"
+
+    - name: Setup mnt-nas.automount
+      community.general.ini_file:
+        path: /etc/systemd/system/mnt-nas.automount
+        section: "{{ item.sec }}"
+        option: "{{ item.opt }}"
+        value: "{{ item.val }}"
+        state: present
+        backup: true
+        no_extra_spaces: true
+      loop: "{{ automount }}"
+
+  notify: Restart mnt-nas.automount
+
+- name: flush handlers
+  ansible.builtin.meta: flush_handlers

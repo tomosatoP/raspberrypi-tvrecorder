@@ -1,0 +1,8 @@
+---
+# Setup mirakurun/conf/tuners.yaml
+- name: Setup tuners yaml
+  become: false
+  ansible.builtin.copy:
+    backup: true
+    dest: "{{ ansible_facts.env.HOME }}/docker-mirakurun-epgstation/mirakurun/conf/tuners.yml"
+    content: "{{ mirakurun.tuners | ansible.builtin.to_nice_yaml(sort_keys=false, indent=2) }}"

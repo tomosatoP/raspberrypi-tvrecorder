@@ -1,0 +1,8 @@
+---
+# Setup mirakurun/conf/channels.yaml
+- name: Setup channels yaml
+  become: false
+  ansible.builtin.copy:
+    backup: true
+    dest: "{{ ansible_facts.env.HOME }}/docker-mirakurun-epgstation/mirakurun/conf/channels.yml"
+    content: "{{ mirakurun.channels | ansible.builtin.to_nice_yaml(sort_keys=false, indent=2) }}"

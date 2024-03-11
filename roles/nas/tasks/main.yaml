@@ -1,0 +1,5 @@
+---
+# Update packages
+- ansible.builtin.include_tasks: packages.yaml
+# Automount NAS
+- ansible.builtin.include_tasks: automount.yaml

@@ -1,0 +1,11 @@
+---
+- name: Set config.txt
+  become: true
+  community.general.ini_file:
+    path: /boot/firmware/config.txt
+    section: "{{ item.sect }}"
+    option: "{{ item.opt }}"
+    values: "{{ item.vals }}"
+    state: "{{ item.stat }}"
+    no_extra_spaces: true
+  loop: "{{ config }}"

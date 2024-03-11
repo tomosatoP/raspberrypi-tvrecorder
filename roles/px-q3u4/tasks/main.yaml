@@ -1,0 +1,9 @@
+---
+# Update packages
+- ansible.builtin.include_tasks: packages.yaml
+# Donwload https://github.com/tsukumijima/px4_drv
+- ansible.builtin.include_tasks: download.yaml
+# Setup firmware
+- ansible.builtin.include_tasks: firmware.yaml
+# Install driver
+- ansible.builtin.include_tasks: driver.yaml

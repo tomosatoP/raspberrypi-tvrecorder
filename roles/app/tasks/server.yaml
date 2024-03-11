@@ -1,0 +1,8 @@
+---
+# Setup mirakurun/conf/server.yml
+- name: Setup server yaml
+  become: false
+  ansible.builtin.copy:
+    backup: true
+    dest: "{{ ansible_facts.env.HOME }}/docker-mirakurun-epgstation/mirakurun/conf/server.yml"
+    content: "{{ mirakurun.server | ansible.builtin.to_nice_yaml(sort_keys=false, indent=2) }}"

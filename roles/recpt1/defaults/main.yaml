@@ -1,0 +1,16 @@
+---
+# We have not been able to find out if all of these packages are needed.
+packages:
+  - git
+  - autoconf
+  - automake
+  - make
+  - gcc
+  - g++
+
+url: https://github.com/stz2012/recpt1.git
+
+target:
+  - recpt1
+  - recpt1ctl
+  - checksignal

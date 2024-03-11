@@ -1,0 +1,32 @@
+---
+- name: Check vars
+  hosts: recorder
+
+  tasks:
+    - ansible.builtin.debug:
+        msg: "HOME (Managed Node): {{ ansible_facts.env.HOME }}"
+
+    - ansible.builtin.debug:
+        msg: "USER (Managed Node): {{ ansible_facts.env.USER }}"
+
+    - ansible.builtin.debug:
+        msg: "LANG (Managed Node): {{ ansible_facts.env.LANG }}"
+
+    - ansible.builtin.debug:
+        msg: "IP4 Address (Maneged Node): {{ ansible_facts.default_ipv4.address }}"
+
+    - ansible.builtin.debug:
+        msg: "ansible_host (Managed Node): {{ ansible_play_hosts }}"
+
+    - ansible.builtin.debug:
+        msg: "HOSTNAME (Managed Node): {{ inventory_hostname }}"
+
+    - ansible.builtin.debug:
+        msg: "local directory: {{ inventory_dir }}"
+
+    - ansible.builtin.debug:
+        msg: "LOOP-IP4 Address (Managed Node): {{ hostvars[item]['ansible_all_ipv4_addresses'] }}"
+      with_items: "{{ ansible_play_hosts }}"
+
+    - ansible.builtin.debug:
+        msg: "local user: {{ lookup('ansible.builtin.env', 'USER') }}"

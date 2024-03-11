@@ -1,0 +1,22 @@
+---
+packages:
+  - smbclient
+  - cifs-utils
+
+nas:
+  source: //192.168.68.168/rpitvrec
+  directory: /mnt/nas
+  type: cifs
+  options: iocharset=utf8,vers=2.1,username="",password=,file_mode=0777,dir_mode=0777,uid=1000,gid=1000,defaults
+
+mount:
+  - { sec: Unit, opt: Description, val: "mount /mnt/nas" }
+  - { sec: Mount, opt: What, val: "{{ nas.source }}" }
+  - { sec: Mount, opt: Where, val: "{{ nas.directory }}" }
+  - { sec: Mount, opt: Type, val: "{{ nas.type }}" }
+  - { sec: Mount, opt: Options, val: "{{ nas.options }}" }
+
+automount:
+  - { sec: Unit, opt: Description, val: "automount /mnt/nas" }
+  - { sec: Automount, opt: Where, val: "{{ nas.directory }}" }
+  - { sec: Install, opt: WantedBy, val: "multi-user.target" }

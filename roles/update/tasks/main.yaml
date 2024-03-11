@@ -1,0 +1,10 @@
+---
+# Update packages
+- name: Update installed packages
+  become: true
+  ansible.builtin.apt:
+    name: "*"
+    update_cache: true
+    state: latest
+    autoclean: true
+    autoremove: true

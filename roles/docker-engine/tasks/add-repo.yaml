@@ -1,0 +1,14 @@
+---
+- name: Add docker's official GPG key
+  become: true
+  ansible.builtin.get_url:
+    url: "{{ apt_repo.gpg_url }}"
+    dest: "{{ apt_repo.gpg }}"
+    mode: a+r
+
+- name: Add the repository to Apt sources
+  become: true
+  ansible.builtin.apt_repository:
+    repo: "deb [arch={{ apt_repo.arch }} signed-by={{ apt_repo.gpg }}] {{ apt_repo.url}} {{ apt_repo.os }} stable"
+    filename: docker
+    state: present

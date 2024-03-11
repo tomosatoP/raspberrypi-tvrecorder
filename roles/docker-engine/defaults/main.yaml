@@ -1,0 +1,26 @@
+---
+packages:
+  - ca-certificates
+  - curl
+
+docker_engine:
+  - docker-ce
+  - docker-ce-cli
+  - containerd.io
+  - docker-buildx-plugin
+  - docker-compose-plugin
+
+old_docker_engine:
+  - docker.io
+  - docker-doc
+  - docker-compose
+  - podman-docker
+  - containerd
+  - runc
+
+apt_repo:
+  gpg_url: https://download.docker.com/linux/debian/gpg
+  gpg: /etc/apt/keyrings/docker.asc
+  url: https://download.docker.com/linux/debian
+  arch: arm64 # $(dpkg --print-architecture)
+  os: bookworm # $(. /etc/os-release && echo "$VERSION_CODENAME")

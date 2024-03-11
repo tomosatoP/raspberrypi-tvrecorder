@@ -1,0 +1,8 @@
+---
+- name: Restart mnt-nas.automount
+  become: true
+  ansible.builtin.systemd_service:
+    name: mnt-nas.automount
+    state: restarted
+    enabled: true
+    daemon-reload: true

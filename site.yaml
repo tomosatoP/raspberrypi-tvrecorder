@@ -1,0 +1,101 @@
+---
+# Customize Raspberri Pi 4 systems: 
+#   - location
+#   - config.txt
+#   - cmdline.txt
+#   - swapfile
+- name: Customize raspi4
+  tags: raspi
+  hosts: recorder
+
+  tasks:
+    - ansible.builtin.import_role:
+        name: raspi
+
+    - name: Reboot
+      become: true
+      ansible.builtin.reboot:
+
+# Update installed packages
+- name: Update packages
+  tags: update
+  hosts: recorder
+
+  tasks:
+    - ansible.builtin.import_role:
+        name: update
+
+    - name: Reboot
+      become: true
+      ansible.builtin.reboot:
+
+# Automount nas
+- name: Automount nas
+  tags: nas
+  hosts: recorder
+
+  tasks:
+    - ansible.builtin.import_role:
+        name: nas
+
+    - name: Reboot
+      become: true
+      ansible.builtin.reboot:
+
+# Install isdb-t/s tuner driver: https://github.com/tsukumijima/px4_drv
+#   - download
+#   - setup firmware
+#   - install driver
+- name: Install isdb-t/s tuner px-q3u4 driver
+  tags: px-q3u4
+  hosts: recorder
+
+  tasks:
+    - ansible.builtin.import_role:
+        name: px-q3u4
+
+    - name: Reboot
+      become: true
+      ansible.builtin.reboot:
+
+# Install docker engine on debian
+- name: Install docker engine
+  tags: docker-engine
+  hosts: recorder
+
+  tasks:
+    - ansible.builtin.import_role:
+        name: docker-engine
+
+    - name: Reboot
+      become: true
+      ansible.builtin.reboot:
+
+# Install application: https://github.com/l3tnun/docker-mirakurun-epgstation
+#   - download
+#   - edit compose.yaml
+#   - make mirakurun/conf/server.yml
+#   - make mirakurun/conf/tuners.yml
+#   - make mirakurun/conf/channels.yml
+#   - copy mirakurun/opt/bin/startup
+#   - edit epgstation/config/config.yml
+- name: Install docker-mirakurun-epgstation
+  tags: app
+  hosts: recorder
+
+  tasks:
+    - ansible.builtin.import_role:
+        name: app
+
+    - name: Reboot
+      become: true
+      ansible.builtin.reboot:
+
+# Pull, Build & Run in detach mode
+- name: Start docker-mirakurun-epgstation
+  tags: start
+  hosts: recorder
+
+  tasks:
+    - ansible.builtin.import_role:
+        name: start

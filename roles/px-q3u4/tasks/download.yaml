@@ -1,0 +1,15 @@
+---
+# Install firmware and driver on initial or update.
+- name: Git clone unofficial driver source
+  become: false
+  ansible.builtin.git:
+    repo: "{{ driver.unofficial.url }}"
+    dest: "{{ ansible_facts.env.HOME }}/px4_drv"
+    version: "{{ driver.unofficial.version }}"
+    depth: 1
+  notify: 
+    - Purge driver
+    - Remove firmware
+
+- name: flush handlers
+  ansible.builtin.meta: flush_handlers

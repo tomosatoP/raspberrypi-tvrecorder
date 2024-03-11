@@ -1,0 +1,163 @@
+---
+mirakurun:
+  server:
+    logLevel: 2
+    path: /var/run/mirakurun.sock
+    port: 40772
+    hostname: "{{ inventory_hostname }}"
+  tuners:
+    - {name: PX4-S0, types: [BS, CS], command: recpt1 --device /dev/px4video0 <channel> - -, decoder: arib-b25-stream-test, isDisabled: false}
+    - {name: PX4-S1, types: [BS, CS], command: recpt1 --device /dev/px4video1 <channel> - -, decoder: arib-b25-stream-test, isDisabled: false}
+    - {name: PX4-S2, types: [BS, CS], command: recpt1 --device /dev/px4video4 <channel> - -, decoder: arib-b25-stream-test, isDisabled: false}
+    - {name: PX4-S3, types: [BS, CS], command: recpt1 --device /dev/px4video5 <channel> - -, decoder: arib-b25-stream-test, isDisabled: false}
+    - {name: PX4-T0, types: [GR], command: recpt1 --device /dev/px4video2 <channel> - -, decoder: arib-b25-stream-test, isDisabled: false}
+    - {name: PX4-T1, types: [GR], command: recpt1 --device /dev/px4video3 <channel> - -, decoder: arib-b25-stream-test, isDisabled: false}
+    - {name: PX4-T2, types: [GR], command: recpt1 --device /dev/px4video6 <channel> - -, decoder: arib-b25-stream-test, isDisabled: false}
+    - {name: PX4-T3, types: [GR], command: recpt1 --device /dev/px4video7 <channel> - -, decoder: arib-b25-stream-test, isDisabled: false}
+  channels:
+    - {name: ＮＨＫＥテレ, type: GR, channel: '16', isDisabled: true}
+    - {name: ゆめ☆ネット11, type: GR, channel: '17', isDisabled: true} 
+    - {name: ＴＳＣテレビせとうち, type: GR, channel: '18', isDisabled: true}
+    - {name: ゆめ☆ネット12, type: GR, channel: '19', isDisabled: true}
+    - {name: ＲＮＣ西日本テレビ, type: GR, channel: '20', isDisabled: true}
+    - {name: ＲＳＫテレ ビ, type: GR, channel: '21', isDisabled: true}
+    - {name: サンテレビ, type: GR, channel: '26', isDisabled: true}
+    - {name: ＯＨＫ, type: GR, channel: '27', isDisabled: true}
+    - {name: 瀬戸内海放送, type: GR, channel: '30', isDisabled: true}
+    - {name: ＮＨＫ総合, type: GR, channel: '32', isDisabled: true}
+    - {name: ＢＳ朝日１, type: BS, channel: BS01_0, serviceId: 151, isDisabled: true}
+    - {name: ＢＳ朝日２, type: BS, channel: BS01_0, serviceId: 152, isDisabled: true}
+    - {name: ＢＳ朝日３, type: BS, channel: BS01_0, serviceId: 153, isDisabled: true}
+    - {name: ＢＳ－ＴＢＳ, type: BS, channel: BS01_1, serviceId: 161, isDisabled: true}
+    - {name: ＢＳ－ＴＢＳ, type: BS, channel: BS01_1, serviceId: 162, isDisabled: true}
+    - {name: ＢＳ－ＴＢＳ, type: BS, channel: BS01_1, serviceId: 163, isDisabled: true}
+    - {name: ＢＳテレ東, type: BS, channel: BS01_2, serviceId: 171, isDisabled: true}
+    - {name: ＢＳテレ東２, type: BS, channel: BS01_2, serviceId: 172, isDisabled: true}
+    - {name: ＢＳテレ東３, type: BS, channel: BS01_2, serviceId: 173, isDisabled: true}
+    - {name: ＢＳ朝日１, type: BS, channel: BS01_3, serviceId: 151, isDisabled: true}
+    - {name: ＢＳ朝日２, type: BS, channel: BS01_3, serviceId: 152, isDisabled: true}
+    - {name: ＢＳ朝日３, type: BS, channel: BS01_3, serviceId: 153, isDisabled: true}
+    - {name: ＷＯＷＯＷプライム, type: BS, channel: BS03_0, serviceId: 191, isDisabled: true}
+    - {name: ＮＨＫ, type: BS, channel: BS03_1, serviceId: 103, isDisabled: true}
+    - {name: ＮＨＫ, type: BS, channel: BS03_1, serviceId: 104, isDisabled: true}
+    - {name: ＷＯＷＯＷライブ, type: BS, channel: BS05_0, serviceId: 192, isDisabled: true}
+    - {name: ＷＯＷＯＷシネマ, type: BS, channel: BS05_1, serviceId: 193, isDisabled: true}
+    - {name: ＷＯＷＯＷライブ, type: BS, channel: BS05_2, serviceId: 192, isDisabled: true}
+    - {name: ＷＯＷＯ Ｗライブ, type: BS, channel: BS05_3, serviceId: 192, isDisabled: true}
+    - {name: ＢＳ１１イレブン, type: BS, channel: BS09_0, serviceId: 211, isDisabled: true}
+    - {name: スターチャンネル１, type: BS, channel: BS09_1, serviceId: 200, isDisabled: true}
+    - {name: ＢＳ１２トゥエルビ, type: BS, channel: BS09_2, serviceId: 222, isDisabled: true}
+    - {name: 放送大学テレビ, type: BS, channel: BS11_0, serviceId: 231, isDisabled: true}
+    - {name: 放送大学テレビ, type: BS, channel: BS11_0, serviceId: 232, isDisabled: true}
+    - {name: ＢＳ釣りビジョン, type: BS, channel: BS11_1, serviceId: 251, isDisabled: true}
+    - {name: ＢＳ日テレ, type: BS, channel: BS13_0, serviceId: 141, isDisabled: true}
+    - {name: ＢＳ日テレ, type: BS, channel: BS13_0, serviceId: 142, isDisabled: true}
+    - {name: ＢＳ日テレ, type: BS, channel: BS13_0, serviceId: 143, isDisabled: true}
+    - {name: ＢＳフジ・１８１, type: BS, channel: BS13_1, serviceId: 181, isDisabled: true}
+    - {name: ＢＳフジ・１８２, type: BS, channel: BS13_1, serviceId: 182, isDisabled: true}
+    - {name: ＢＳフジ・１８３, type: BS, channel: BS13_1, serviceId: 183, isDisabled: true}
+    - {name: ＢＳアニマックス, type: BS, channel: BS13_2, serviceId: 236, isDisabled: true}
+    - {name: ＮＨＫ　ＢＳ, type: BS, channel: BS15_0, serviceId: 101, isDisabled: true}
+    - {name: ＮＨＫ　ＢＳ, type: BS, channel: BS15_0, serviceId: 102, isDisabled: true}
+    - {name: スターチャンネル２, type: BS, channel: BS15_1, serviceId: 201, isDisabled: true}
+    - {name: スターチャンネル３, type: BS, channel: BS15_1, serviceId: 202, isDisabled: true}
+    - {name: Ｊ　ＳＰＯＲＴＳ　４, type: BS, channel: BS19_0, serviceId: 245, isDisabled: true}
+    - {name: Ｊ　ＳＰＯＲＴＳ　１, type: BS, channel: BS19_1, serviceId: 242, isDisabled: true}
+    - {name: Ｊ　ＳＰＯＲＴＳ　２, type: BS, channel: BS19_2, serviceId: 243, isDisabled: true}
+    - {name: Ｊ　ＳＰＯＲＴＳ　３, type: BS, channel: BS19_3, serviceId: 244, isDisabled: true}
+    - {name: ＷＯＷＯＷプラス, type: BS, channel: BS21_0, serviceId: 252, isDisabled: true}
+    - {name: 日本映画専門ｃｈ, type: BS, channel: BS21_1, serviceId: 255, isDisabled: true}
+    - {name: グリーンチャンネル, type: BS, channel: BS21_2, serviceId: 234, isDisabled: true}
+    - {name: ディズニーｃｈ, type: BS, channel: BS23_0, serviceId: 256, isDisabled: true}
+    - {name: ＢＳよしもと, type: BS, channel: BS23_1, serviceId: 265, isDisabled: true}
+    - {name: ＢＳＪａｐａｎｅｘｔ, type: BS, channel: BS23_2, serviceId: 263, isDisabled: true}
+    - {name: ＢＳ松竹東急, type: BS, channel: BS23_3, serviceId: 260, isDisabled: true}
+    - {name: ＴＢＳチャンネ ル１, type: CS, channel: CS2, serviceId: 296, isDisabled: true}
+    - {name: テレ朝チャンネル１, type: CS, channel: CS2, serviceId: 298, isDisabled: true}
+    - {name: テレ朝チャンネル２, type: CS, channel: CS2, serviceId: 299, isDisabled: true}
+    - {name: ディズニージュニア, type: CS, channel: CS2, serviceId: 339, isDisabled: true}
+    - {name: スカイＡ, type: CS, channel: CS4, serviceId: 250, isDisabled: true}
+    - {name: 時代劇専門ｃｈ, type: CS, channel: CS4, serviceId: 292, isDisabled: true}
+    - {name: エンタメ～テレ, type: CS, channel: CS4, serviceId: 301, isDisabled: true}
+    - {name: ＭＴＶ, type: CS, channel: CS4, serviceId: 323, isDisabled: true}
+    - {name: ホームドラマＣＨ, type: CS, channel: CS6, serviceId: 294, isDisabled: true}
+    - {name: ミュージック・エア, type: CS, channel: CS6, serviceId: 324, isDisabled: true}
+    - {name: 歌謡ポップス, type: CS, channel: CS6, serviceId: 329, isDisabled: true}
+    - {name: カートゥーン, type: CS, channel: CS6, serviceId: 331, isDisabled: true}
+    - {name: ディスカバリー, type: CS, channel: CS6, serviceId: 340, isDisabled: true}
+    - {name: アニマルプラネット, type: CS, channel: CS6, serviceId: 341, isDisabled: true}
+    - {name: ＣＮＮｊ, type: CS, channel: CS6, serviceId: 354, isDisabled: true}
+    - {name: 囲碁・将棋チャンネル, type: CS, channel: CS6, serviceId: 363, isDisabled: true}
+    - {name: ショップチャンネル, type: CS, channel: CS8, serviceId: 55, isDisabled: true}
+    - {name: 東映チャンネル, type: CS, channel: CS8, serviceId: 218, isDisabled: true}
+    - {name: Ｍｎｅｔ, type: CS, channel: CS8, serviceId: 318, isDisabled: true}
+    - {name: 日テレＮＥ ＷＳ２４, type: CS, channel: CS8, serviceId: 349, isDisabled: true}
+    - {name: 衛星劇場, type: CS, channel: CS10, serviceId: 219, isDisabled: true}
+    - {name: ＫＢＳ　Ｗｏｒｌｄ, type: CS, channel: CS10, serviceId: 317, isDisabled: true}
+    - {name: スポーツライブ＋, type: CS, channel: CS10, serviceId: 800, isDisabled: true}
+    - {name: スカチャン１, type: CS, channel: CS10, serviceId: 801, isDisabled: true}
+    - {name: ＧＡＯＲＡ, type: CS, channel: CS12, serviceId: 254, isDisabled: true}
+    - {name: エムオン！, type: CS, channel: CS12, serviceId: 325, isDisabled: true}
+    - {name: キッズステーション, type: CS, channel: CS12, serviceId: 330, isDisabled: true}
+    - {name: ナショジオ, type: CS, channel: CS12, serviceId: 343, isDisabled: true}
+    - {name: ザ・シネマ, type: CS, channel: CS14, serviceId: 227, isDisabled: true}
+    - {name: ファミリー劇場, type: CS, channel: CS14, serviceId: 293, isDisabled: true}
+    - {name: スーパー！ドラマＴＶ, type: CS, channel: CS14, serviceId: 310, isDisabled: true}
+    - {name: ヒストリーチャンネル, type: CS, channel: CS14, serviceId: 342, isDisabled: true}
+    - {name: ＳＫＹ　ＳＴＡＧＥ, type: CS, channel: CS16, serviceId: 290, isDisabled: true}
+    - {name: アクションチャンネル, type: CS, channel: CS16, serviceId: 311, isDisabled: true}
+    - {name: ミステリーチャンネル, type: CS, channel: CS16, serviceId: 316, isDisabled: true}
+    - {name: スペシャプラス, type: CS, channel: CS16, serviceId: 321, isDisabled: true}
+    - {name: ＡＴ－Ｘ, type: CS, channel: CS16, serviceId: 333, isDisabled: true}
+    - {name: ＢＢＣニュース, type: CS, channel: CS16, serviceId: 353, isDisabled: true}
+    - {name: ムービープラス, type: CS, channel: CS18, serviceId: 240, isDisabled: true}
+    - {name: ゴルフネットワーク, type: CS, channel: CS18, serviceId: 262, isDisabled: true}
+    - {name: チャンネル銀河, type: CS, channel: CS18, serviceId: 305, isDisabled: true}
+    - {name: ＬａＬａＴＶ, type: CS, channel: CS18, serviceId: 314, isDisabled: true}
+    - {name: フジテレビＯＮＥ, type: CS, channel: CS20, serviceId: 307, isDisabled: true}
+    - {name: フジテレビＴＷＯ, type: CS, channel: CS20, serviceId: 308, isDisabled: true}
+    - {name: フジテレビＮＥＸＴ, type: CS, channel: CS20, serviceId: 309, isDisabled: true}
+    - {name: スペースシャワーＴＶ, type: CS, channel: CS20, serviceId: 322, isDisabled: true}
+    - {name: ＱＶＣ, type: CS, channel: CS22, serviceId: 161, isDisabled: true}
+    - {name: ＴＢＳチャンネル２, type: CS, channel: CS22, serviceId: 297, isDisabled: true}
+    - {name: Ｄｌｉｆｅ, type: CS, channel: CS22, serviceId: 312, isDisabled: true}
+    - {name: ＴＢＳ　ＮＥＷＳ, type: CS, channel: CS22, serviceId: 351, isDisabled: true}
+    - {name: AT-X HD, type: SKY, channel: ATXHD, serviceId: 33435, satellite: JCSAT3A, isDisabled: true}
+    - {name: AXN HD, type: SKY, channel: AXNHD, serviceId: 33418, satellite: JCSAT4A, isDisabled: true}
+    - {name: BS SPTV, type: SKY, channel: CH585, serviceId: 33353, satellite: JCSAT3A, isDisabled: true}
+
+epgstation:
+  config:
+    apiServers:
+      - "http://{{ inventory_hostname }}:8888"
+      - http://localhost:8888
+    recordedFormat:  '%HALF_WIDTH_TITLE% %CHNAME% %YEAR%-%MONTH%-%DAY%T%HOUR%:%MIN%'
+    recorded:
+      - {name: nas, path: '%ROOT%/nas'}      
+      - {name: recorded, path: '%ROOT%/recorded'}
+    recordedTmp: '%ROOT%/recordedTmp'
+
+compose:
+  remove:
+    services:
+      mirakurun:
+        devices:
+  add:
+    services:
+      mirakurun:
+        devices:
+          - /dev/bus:dev/bus
+          - /dev/px4video0:/dev/px4video0
+          - /dev/px4video1:/dev/px4video1
+          - /dev/px4video2:/dev/px4video2
+          - /dev/px4video3:/dev/px4video3
+          - /dev/px4video4:/dev/px4video4
+          - /dev/px4video5:/dev/px4video5
+          - /dev/px4video6:/dev/px4video6
+          - /dev/px4video7:/dev/px4video7
+        volumes:
+          - ./mirakurun/opt:/opt
+      epgstation:
+        volumes:
+          - ./recordedTmp:/app/recordedTmp
+          - /mnt/nas:/app/nas

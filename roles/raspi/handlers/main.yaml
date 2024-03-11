@@ -1,0 +1,8 @@
+---
+- name: Restart dphys-swapfile
+  become: true
+  ansible.builtin.systemd_service:
+    name: dphys-swapfile
+    state: restarted
+    enabled: true
+    daemon-reload: true

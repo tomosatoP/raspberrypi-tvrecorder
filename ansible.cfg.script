@@ -1,0 +1,6 @@
+/^inventory=/d
+/^;inventory=\/etc\/ansible\/hosts$/a inventory=inventory.yaml
+/^ssh_args=/d
+/^;ssh_args=/a ssh_args=-C\ -o\ ControlMaster=auto\ -o\ ControlPersist=60s\ -o\ StrictHostKeyChecking=no\ -o\ UserKnownHostsFile=\/dev\/null
+/^callbacks_enabled=/d
+/^;callbacks_enabled=/a callbacks_enabled=profile_tasks

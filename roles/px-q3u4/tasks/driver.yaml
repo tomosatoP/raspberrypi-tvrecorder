@@ -1,0 +1,11 @@
+---
+# Install driver
+- name: Install drvier from dev package
+  become: true
+  ansible.builtin.apt:
+    deb: "{{ driver.unofficial.deb }}"
+
+- name: Load px4_drv module
+  become: true
+  community.general.modprobe:
+    name: px4_drv
