@@ -70,6 +70,7 @@ sudo nmcli connection reload
 sudo nmcli connection up "Wired connection 1"
 #念の為に再起動
 ~~~
+セキュリティ面からは、ローカルのDHCPサーバから指定する方が良い
 
 ## 接続機器の確認
 
